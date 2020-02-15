@@ -23,6 +23,9 @@ object Versions {
     const val rxJava2 = "2.2.10"
     const val rxJava2Android = "2.1.1"
     const val rxBinding = "2.1.1"
+
+    /** Dagger */
+    const val dagger = "2.26"
 }
 
 object Dependencies {
@@ -43,8 +46,12 @@ object Dependencies {
     const val androidx_junit = "androidx.test.ext:junit:${Versions.androidx_junit}"
     const val androidx_espresso = "androidx.test.espresso:espresso-core:${Versions.androidx_espresso}"
 
-    /** Rx */
+    /** RxJava2 */
     const val rxJava2 = "io.reactivex.rxjava2:rxjava:${Versions.rxJava2}"
     const val rxJava2Android = "io.reactivex.rxjava2:rxandroid:${Versions.rxJava2Android}"
     const val rxBinding = "com.jakewharton.rxbinding2:rxbinding:${Versions.rxBinding}"
+
+    /** Dagger */
+    const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+    const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
 }

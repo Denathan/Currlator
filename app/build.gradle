@@ -33,6 +33,9 @@ dependencies {
     implementation Dependencies.rxJava2Android
     implementation Dependencies.rxBinding
 
+    implementation Dependencies.dagger
+    annotationProcessor Dependencies.daggerCompiler
+
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
