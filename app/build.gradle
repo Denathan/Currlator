@@ -28,6 +28,11 @@ dependencies {
     implementation Dependencies.androidx_appcompat
     implementation Dependencies.androidx_core_ktx
     implementation Dependencies.constraint_layout
+    
+    implementation Dependencies.rxJava2
+    implementation Dependencies.rxJava2Android
+    implementation Dependencies.rxBinding
+
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
