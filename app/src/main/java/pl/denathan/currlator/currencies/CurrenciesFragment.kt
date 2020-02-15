@@ -1,10 +1,11 @@
-package pl.denathan.currlator
+package pl.denathan.currlator.currencies
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import pl.denathan.currlator.R
 
 class CurrenciesFragment : Fragment() {
 
