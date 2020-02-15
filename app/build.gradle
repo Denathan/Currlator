@@ -48,7 +48,9 @@ dependencies {
     kapt Dependencies.daggerCompiler
 
     implementation Dependencies.retrofit
+    implementation Dependencies.rxJava2Adapter
     implementation Dependencies.gson
+    implementation Dependencies.gsonConverter
 
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit

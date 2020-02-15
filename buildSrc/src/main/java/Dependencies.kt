@@ -65,5 +65,7 @@ object Dependencies {
 
     /** Retrofit && Gson */
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
+    const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
 }
