@@ -1,7 +1,5 @@
 package pl.denathan.currlator.di
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -20,7 +18,7 @@ class NetworkModule {
         Retrofit.Builder()
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .baseUrl(BuildConfig.API_URL + BuildConfig.API_ENDPOINT)
+            .baseUrl(BuildConfig.API_URL)
             .client(OkHttpClient.Builder().build())
             .build()
 }

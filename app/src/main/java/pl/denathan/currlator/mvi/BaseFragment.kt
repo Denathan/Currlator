@@ -2,10 +2,10 @@ package pl.denathan.currlator.mvi
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import dagger.android.support.DaggerFragment
 
 abstract class BaseFragment<VS : BaseViewState, V : BaseView<VS, *>, M : BaseViewModel<VS, V, *>> :
-    Fragment() {
+    DaggerFragment() {
 
     private lateinit var viewModel: M
 

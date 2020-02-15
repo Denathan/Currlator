@@ -3,13 +3,22 @@ package pl.denathan.currlator.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import dagger.android.AndroidInjectionModule
+import dagger.android.AndroidInjector
+import pl.denathan.currlator.CurrlatorApplication
+import pl.denathan.currlator.currencies.di.CurrenciesModule
 import javax.inject.Singleton
 
 @Singleton
 @Component(
-    modules = [NetworkModule::class]
+    modules = [
+        AndroidInjectionModule::class,
+        ViewModelModule::class,
+        NetworkModule::class,
+        ServiceModule::class,
+        CurrenciesModule::class]
 )
-interface ApplicationComponent {
+interface ApplicationComponent : AndroidInjector<CurrlatorApplication> {
 
     @Component.Factory
     interface Factory {

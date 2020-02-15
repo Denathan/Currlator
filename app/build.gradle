@@ -17,8 +17,8 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "API_URL", apikeyProperties['API_URL'])
-        buildConfigField("String", "API_ENDPOINT", apikeyProperties['API_ENDPOINT'])
+        buildConfigField("String", "API_URL", "\"" + apikeyProperties['API_URL'] + "\"")
+        buildConfigField("String", "API_ENDPOINT", "\"" + apikeyProperties['API_ENDPOINT'] + "\"")
     }
     buildTypes {
         release {
@@ -44,6 +44,7 @@ dependencies {
     implementation Dependencies.constraint_layout
     implementation Dependencies.activity
     implementation Dependencies.fragment
+    implementation Dependencies.lifecycle
 
     implementation Dependencies.rxJava2
     implementation Dependencies.rxJava2Android
@@ -51,6 +52,8 @@ dependencies {
 
     implementation Dependencies.dagger
     kapt Dependencies.daggerCompiler
+    implementation Dependencies.daggerSupport
+    kapt Dependencies.daggerProcessor
 
     implementation Dependencies.retrofit
     implementation Dependencies.rxJava2Adapter

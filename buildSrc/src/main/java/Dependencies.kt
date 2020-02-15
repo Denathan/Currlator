@@ -13,6 +13,7 @@ object Versions {
     const val constraint_layout = "1.1.3"
     const val activity = "1.1.0"
     const val fragment = "1.2.1"
+    const val lifecycle = "2.2.0"
 
     /** Unit tests */
     const val junit = "4.12"
@@ -46,6 +47,7 @@ object Dependencies {
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
     const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
     const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
+    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
 
     /** Unit tests dependencies */
     const val junit = "junit:junit:${Versions.junit}"
@@ -62,6 +64,8 @@ object Dependencies {
     /** Dagger */
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+    const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
+    const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
     /** Retrofit && Gson */
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
