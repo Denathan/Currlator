@@ -17,9 +17,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun Fragment.display(supportFragmentManager: FragmentManager, containerViewId: Int, fragmentTag: String) {
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(containerViewId, this, fragmentTag)
-        fragmentTransaction.commit()
+        supportFragmentManager.beginTransaction().also { fragmentTransaction ->
+            fragmentTransaction.replace(containerViewId, this, fragmentTag)
+            fragmentTransaction.commit()
+        }
     }
 
     private companion object {

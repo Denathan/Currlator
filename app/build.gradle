@@ -33,7 +33,6 @@ dependencies {
     implementation Dependencies.rxJava2Android
     implementation Dependencies.rxBinding
 
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
