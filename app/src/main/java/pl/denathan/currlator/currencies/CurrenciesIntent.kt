@@ -4,4 +4,5 @@ import pl.denathan.currlator.mvi.BaseIntent
 
 sealed class CurrenciesIntent : BaseIntent {
 
+    object FragmentStarted : CurrenciesIntent()
 }

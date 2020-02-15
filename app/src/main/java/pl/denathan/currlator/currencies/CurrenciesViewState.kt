@@ -1,5 +1,6 @@
 package pl.denathan.currlator.currencies
 
 import pl.denathan.currlator.mvi.BaseViewState
+import pl.denathan.currlator.remote.data.CurrencyResponse
 
-object CurrenciesViewState : BaseViewState
+data class CurrenciesViewState(val currencyResponse: CurrencyResponse? = null) : BaseViewState
