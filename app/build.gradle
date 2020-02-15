@@ -18,6 +18,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "API_URL", apikeyProperties['API_URL'])
+        buildConfigField("String", "API_ENDPOINT", apikeyProperties['API_ENDPOINT'])
     }
     buildTypes {
         release {
