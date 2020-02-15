@@ -28,6 +28,10 @@ object Versions {
 
     /** Dagger */
     const val dagger = "2.26"
+
+    /** Retrofit && Gson */
+    const val retrofit = "2.7.1"
+    const val gson = "2.8.6"
 }
 
 object Dependencies {
@@ -58,4 +62,8 @@ object Dependencies {
     /** Dagger */
     const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
     const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
+
+    /** Retrofit && Gson */
+    const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
+    const val gson = "com.google.code.gson:gson:${Versions.gson}"
 }

@@ -40,6 +40,9 @@ dependencies {
     implementation Dependencies.dagger
     kapt Dependencies.daggerCompiler
 
+    implementation Dependencies.retrofit
+    implementation Dependencies.gson
+
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
