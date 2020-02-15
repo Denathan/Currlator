@@ -5,9 +5,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import io.reactivex.Observable
 import pl.denathan.currlator.R
+import pl.denathan.currlator.mvi.BaseView
 
-class CurrenciesFragment : Fragment() {
+interface CurrenciesView : BaseView<CurrenciesViewState, CurrenciesIntent>
+
+class CurrenciesFragment : Fragment(), CurrenciesView {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -15,4 +19,10 @@ class CurrenciesFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_currencies, container, false)
     }
+
+    override fun render(viewState: CurrenciesViewState) {
+
+    }
+
+    override fun emitIntent(): Observable<CurrenciesIntent> = Observable.never()
 }
