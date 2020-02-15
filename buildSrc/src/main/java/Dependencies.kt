@@ -11,6 +11,8 @@ object Versions {
     /** AndroidX */
     const val androidx = "1.0.2"
     const val constraint_layout = "1.1.3"
+    const val activity = "1.1.0"
+    const val fragment = "1.2.1"
 
     /** Unit tests */
     const val junit = "4.12"
@@ -38,6 +40,8 @@ object Dependencies {
     const val androidx_appcompat = "androidx.appcompat:appcompat:${Versions.androidx}"
     const val androidx_core_ktx = "androidx.core:core-ktx:${Versions.androidx}"
     const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
+    const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
+    const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
 
     /** Unit tests dependencies */
     const val junit = "junit:junit:${Versions.junit}"

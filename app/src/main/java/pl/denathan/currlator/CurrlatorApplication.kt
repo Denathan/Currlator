@@ -1,8 +1,8 @@
 package pl.denathan.currlator
 
 import android.app.Application
-import pl.denathan.currlator.app.ApplicationComponent
-import pl.denathan.currlator.app.DaggerApplicationComponent
+import pl.denathan.currlator.di.ApplicationComponent
+import pl.denathan.currlator.di.DaggerApplicationComponent
 
 class CurrlatorApplication : Application() {
 

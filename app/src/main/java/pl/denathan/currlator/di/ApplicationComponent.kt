@@ -1,4 +1,4 @@
-package pl.denathan.currlator.app
+package pl.denathan.currlator.di
 
 import android.content.Context
 import dagger.BindsInstance
