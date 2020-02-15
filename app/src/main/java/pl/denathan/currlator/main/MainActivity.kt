@@ -1,10 +1,10 @@
-package pl.denathan.currlator
+package pl.denathan.currlator.main
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import kotlinx.android.synthetic.main.activity_main.fragmentContainer
+import pl.denathan.currlator.R
 import pl.denathan.currlator.currencies.CurrenciesFragment
 
 class MainActivity : AppCompatActivity() {
@@ -13,7 +13,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CurrenciesFragment().display(supportFragmentManager, R.id.fragmentContainer, FRAGMENT_CURRENCIES_TAG)
+        CurrenciesFragment().display(supportFragmentManager,
+            R.id.fragmentContainer,
+            FRAGMENT_CURRENCIES_TAG
+        )
     }
 
     private fun Fragment.display(supportFragmentManager: FragmentManager, containerViewId: Int, fragmentTag: String) {
