@@ -3,8 +3,12 @@ package pl.denathan.currlator.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import javax.inject.Singleton
 
-@Component
+@Singleton
+@Component(
+    modules = [NetworkModule::class]
+)
 interface ApplicationComponent {
 
     @Component.Factory

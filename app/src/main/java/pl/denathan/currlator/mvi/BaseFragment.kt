@@ -9,7 +9,7 @@ abstract class BaseFragment<VS : BaseViewState, V : BaseView<VS, *>, M : BaseVie
 
     private lateinit var viewModel: M
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         injection()
         super.onAttach(context)
     }
