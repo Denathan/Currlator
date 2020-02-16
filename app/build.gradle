@@ -62,6 +62,7 @@ dependencies {
     implementation Dependencies.okHttp
 
     testImplementation Dependencies.junit
+    testImplementation Dependencies.mockito
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
 }

@@ -17,6 +17,7 @@ object Versions {
 
     /** Unit tests */
     const val junit = "4.12"
+    const val mockito = "2.2.0"
 
     /** Instrumentation tests */
     const val androidx_junit = "1.1.1"
@@ -52,6 +53,7 @@ object Dependencies {
 
     /** Unit tests dependencies */
     const val junit = "junit:junit:${Versions.junit}"
+    const val mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito}"
 
     /** Instrumentation tests dependencies */
     const val androidx_junit = "androidx.test.ext:junit:${Versions.androidx_junit}"
