@@ -15,4 +15,9 @@ class CurrenciesViewModel @Inject constructor(private val interactor: Currencies
             is CurrenciesIntent.FragmentStarted -> interactor.fetchCurrencies()
             else -> Observable.never()
         }
+
+    override fun unbind() {
+        super.unbind()
+        interactor.unbindSubject.onNext(Unit)
+    }
 }
