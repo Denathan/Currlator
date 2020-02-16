@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Currlator</string>
+    <string name="currency_screen_title">Rates</string>
 </resources>
