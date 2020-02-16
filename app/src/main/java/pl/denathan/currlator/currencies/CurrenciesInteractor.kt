@@ -11,7 +11,7 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
     val unbindSubject = PublishSubject.create<Unit>()
 
     fun fetchCurrencies(): Observable<CurrenciesAction> =
-        Observable.interval(1, TimeUnit.SECONDS)
+        Observable.interval(0, 1, TimeUnit.SECONDS)
             .takeUntil(unbindSubject)
             .distinctUntilChanged()
             .flatMapSingle { apiService.fetchRates(baseCurrency) }
