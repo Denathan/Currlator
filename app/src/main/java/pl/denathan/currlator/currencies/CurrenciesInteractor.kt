@@ -11,10 +11,10 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
     val unbindSubject = PublishSubject.create<Unit>()
 
     fun fetchCurrencies(): Observable<CurrenciesAction> =
-        Observable.interval(
-            1,
-            TimeUnit.SECONDS
-        ).takeUntil(unbindSubject).flatMapSingle { apiService.fetchRates(baseCurrency) }
+        Observable.interval(1, TimeUnit.SECONDS)
+            .takeUntil(unbindSubject)
+            .distinctUntilChanged()
+            .flatMapSingle { apiService.fetchRates(baseCurrency) }
             .map<CurrenciesAction> { CurrenciesAction.FetchCurrencyData(it) }
 
     private companion object {
