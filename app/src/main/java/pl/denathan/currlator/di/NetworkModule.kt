@@ -1,10 +1,14 @@
 package pl.denathan.currlator.di
 
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import pl.denathan.currlator.BuildConfig
+import pl.denathan.currlator.remote.CurrenciesDeserializer
+import pl.denathan.currlator.remote.data.CurrencyResponse
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -15,9 +19,12 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofitClient(okHttpClient: OkHttpClient): Retrofit =
+    fun provideRetrofitClient(
+        okHttpClient: OkHttpClient,
+        gsonConverterFactory: GsonConverterFactory
+    ): Retrofit =
         Retrofit.Builder()
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(gsonConverterFactory)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .baseUrl(BuildConfig.API_URL)
             .client(okHttpClient)
@@ -37,4 +44,17 @@ class NetworkModule {
         OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
             .build()
+
+    @Provides
+    @Singleton
+    fun providesGsonConverterFactory(gson: Gson): GsonConverterFactory =
+        GsonConverterFactory.create(gson)
+
+    @Provides
+    @Singleton
+    fun providesGson(): Gson =
+        GsonBuilder().registerTypeAdapter(
+            CurrencyResponse::class.java,
+            CurrenciesDeserializer()
+        ).create()
 }

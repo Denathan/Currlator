@@ -59,9 +59,9 @@ dependencies {
     implementation Dependencies.rxJava2Adapter
     implementation Dependencies.gson
     implementation Dependencies.gsonConverter
+    implementation Dependencies.okHttp
 
     testImplementation Dependencies.junit
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
-    implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
 }

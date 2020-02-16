@@ -30,9 +30,10 @@ object Versions {
     /** Dagger */
     const val dagger = "2.26"
 
-    /** Retrofit && Gson */
+    /** Retrofit, OkHttp && Gson */
     const val retrofit = "2.7.1"
     const val gson = "2.8.6"
+    const val okHttp = "4.3.1"
 }
 
 object Dependencies {
@@ -67,9 +68,10 @@ object Dependencies {
     const val daggerSupport = "com.google.dagger:dagger-android-support:${Versions.dagger}"
     const val daggerProcessor = "com.google.dagger:dagger-android-processor:${Versions.dagger}"
 
-    /** Retrofit && Gson */
+    /** Retrofit, OkHttp && Gson */
     const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.retrofit}"
     const val rxJava2Adapter = "com.squareup.retrofit2:adapter-rxjava2:${Versions.retrofit}"
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
+    const val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
 }

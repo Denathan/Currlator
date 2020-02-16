@@ -11,7 +11,8 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
         Observable.interval(
             1,
             TimeUnit.SECONDS
-        ).flatMapSingle { apiService.fetchRates(baseCurrency) }.map { CurrenciesAction.FetchCurrencyData(it) }
+        ).flatMapSingle { apiService.fetchRates(baseCurrency) }
+            .map<CurrenciesAction> { CurrenciesAction.FetchCurrencyData(it) }
 
     private companion object {
         const val baseCurrency = "EUR"

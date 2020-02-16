@@ -1,6 +1,6 @@
 package pl.denathan.currlator.remote.data
 
 data class CurrencyResponse(
-    val baseCurrency: String,
+    val baseCurrency: CurrencyType,
     val rates: Rates
 )
