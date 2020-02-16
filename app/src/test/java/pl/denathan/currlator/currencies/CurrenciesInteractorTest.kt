@@ -38,7 +38,7 @@ class CurrenciesInteractorTest {
         testScheduler.advanceTimeBy(1, SECONDS)
 
         val action = CurrenciesAction.FetchCurrencyData(response)
-        testObserver.assertValue(action)
+        testObserver.assertValues(action, action)
     }
 
     @Test
@@ -48,7 +48,7 @@ class CurrenciesInteractorTest {
         whenever(apiService.fetchRates(any())) doReturn Single.just(response)
 
         val testObserver = interactor.fetchCurrencies().test()
-        testScheduler.advanceTimeBy(2, SECONDS)
+        testScheduler.advanceTimeBy(1, SECONDS)
         interactor.unbindSubject.onNext(Unit)
         testScheduler.advanceTimeBy(1, SECONDS)
 
