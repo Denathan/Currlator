@@ -14,6 +14,7 @@ object Versions {
     const val activity = "1.1.0"
     const val fragment = "1.2.1"
     const val lifecycle = "2.2.0"
+    const val material = "1.1.0"
 
     /** Unit tests */
     const val junit = "4.12"
@@ -50,6 +51,7 @@ object Dependencies {
     const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
     const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val material = "com.google.android.material:material:${Versions.material}"
 
     /** Unit tests dependencies */
     const val junit = "junit:junit:${Versions.junit}"

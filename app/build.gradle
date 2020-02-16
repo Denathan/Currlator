@@ -45,6 +45,7 @@ dependencies {
     implementation Dependencies.activity
     implementation Dependencies.fragment
     implementation Dependencies.lifecycle
+    implementation Dependencies.material
 
     implementation Dependencies.rxJava2
     implementation Dependencies.rxJava2Android
@@ -65,6 +66,4 @@ dependencies {
     testImplementation Dependencies.mockito
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
-
-    implementation 'com.google.android.material:material:1.1.0'
 }
