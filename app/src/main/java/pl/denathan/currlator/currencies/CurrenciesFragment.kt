@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
+import kotlinx.android.synthetic.main.fragment_currencies.currencies_list
 import pl.denathan.currlator.R
+import pl.denathan.currlator.currencies.adapter.CurrenciesAdapter
 import pl.denathan.currlator.di.ViewModelFactory
 import pl.denathan.currlator.mvi.BaseFragment
 import pl.denathan.currlator.mvi.BaseView
@@ -28,6 +31,7 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
         )[CurrenciesViewModel::class.java]
     }
 
+    private lateinit var currenciesAdapter: CurrenciesAdapter
     private val fragmentStartedSubject = PublishSubject.create<CurrenciesIntent>()
 
     override fun setViewModel(): CurrenciesViewModel = viewModel
@@ -41,13 +45,32 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
         return inflater.inflate(R.layout.fragment_currencies, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+    }
+
     override fun onStart() {
         super.onStart()
         fragmentStartedSubject.onNext(CurrenciesIntent.FragmentStarted)
     }
 
     override fun render(viewState: CurrenciesViewState) {
+        with(viewState) {
+            currencyResponse?.let {
+                currenciesAdapter.submitList(it.rates.currency)
+            }
+        }
     }
 
     override fun emitIntent(): Observable<CurrenciesIntent> = fragmentStartedSubject
+
+    private fun initRecyclerView() {
+        currenciesAdapter = CurrenciesAdapter()
+        with(currencies_list) {
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+            adapter = currenciesAdapter
+        }
+    }
 }

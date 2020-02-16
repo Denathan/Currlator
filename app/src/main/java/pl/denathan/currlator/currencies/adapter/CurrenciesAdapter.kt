@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.view_currency_row.view.title
 import pl.denathan.currlator.R
 import pl.denathan.currlator.remote.data.Currency
 
-class CurrienciesAdapter : ListAdapter<Currency, CurrencyViewHolder>(CurrenciesItemCallback()) {
+class CurrenciesAdapter : ListAdapter<Currency, CurrencyViewHolder>(CurrenciesItemCallback()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder =
         CurrencyViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.view_currency_row, parent, false))
 
