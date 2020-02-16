@@ -1,12 +1,16 @@
 package pl.denathan.currlator.currencies.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
+import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
 import kotlinx.android.synthetic.main.view_currency_row.view.title
 import pl.denathan.currlator.R
@@ -20,7 +24,7 @@ class CurrenciesAdapter :
                 R.layout.view_currency_row,
                 parent,
                 false
-            )
+            ), parent.context
         )
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int) {
@@ -32,7 +36,7 @@ class CurrenciesAdapter :
         else holder.input.setText(getItem(position).rate.toString())
     }
 
-    class CurrencyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+    class CurrencyViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.title
         val input: TextInputEditText = itemView.input
@@ -40,6 +44,11 @@ class CurrenciesAdapter :
         fun bind(currency: Currency) {
             title.text = currency.currencyType.code
             input.setText(currency.rate.toString())
+
+            Glide.with(context)
+                .load(R.drawable.ic_launcher_background)
+                .apply(RequestOptions.circleCropTransform())
+                .into(itemView.image)
         }
     }
 }

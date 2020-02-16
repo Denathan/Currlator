@@ -36,6 +36,9 @@ object Versions {
     const val retrofit = "2.7.1"
     const val gson = "2.8.6"
     const val okHttp = "4.3.1"
+
+    /** Glide */
+    const val glide = "4.11.0"
 }
 
 object Dependencies {
@@ -78,4 +81,9 @@ object Dependencies {
     const val gson = "com.google.code.gson:gson:${Versions.gson}"
     const val gsonConverter = "com.squareup.retrofit2:converter-gson:${Versions.retrofit}"
     const val okHttp = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
+
+    /** Glide */
+
+    const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
+    const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
 }

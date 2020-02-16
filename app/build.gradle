@@ -66,4 +66,7 @@ dependencies {
     testImplementation Dependencies.mockito
     androidTestImplementation Dependencies.androidx_junit
     androidTestImplementation Dependencies.androidx_espresso
+
+    implementation Dependencies.glide
+    kapt Dependencies.glideCompiler
 }
