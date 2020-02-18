@@ -1,4 +1,37 @@
 <resources>
     <string name="app_name">Currlator</string>
     <string name="currency_screen_title">Rates</string>
+    <string name="currency_euro">Euro</string>
+    <string name="currency_australian_dollar">Australian Dollar</string>
+    <string name="currency_bulgarian_lev">Bulgarian Lev</string>
+    <string name="currency_brazilian_real">Brazilian Real</string>
+    <string name="currency_canadian_dollar">Canadian Dollar</string>
+    <string name="currency_swiss_franc">Swiss Franc</string>
+    <string name="currency_chinese_juan">Chinese Juan</string>
+    <string name="currency_czech_koruna">Czech Koruna</string>
+    <string name="currency_danish_krone">Danish Krone</string>
+    <string name="currency_british_pound">British Pound</string>
+    <string name="currency_hong_kong_dollar">Hong Kong Dollar</string>
+    <string name="currency_croatian_kuna">Coratian Kuna</string>
+    <string name="currency_hungarian_fornit">Hundarian Fornit</string>
+    <string name="currency_indonesian_rupiah">Indonesian Rupiah</string>
+    <string name="currency_isreali_new_shekel">Israeli New Shekel</string>
+    <string name="currency_indian_rupee">Indian Rupee</string>
+    <string name="currency_icelandic_krona">Icelandic Krona</string>
+    <string name="currency_japanese_yen">Japanese Yen</string>
+    <string name="currency_south_korean_won">South Korean Won</string>
+    <string name="currency_mexican_peso">Mexican Peso</string>
+    <string name="currency_malaysian_ringgit">Malaysian Ringgit</string>
+    <string name="currency_norwegian_krone">Norwegian Krone</string>
+    <string name="currency_new_zealand_dollar">New Zealand Dollar</string>
+    <string name="currency_philippine_peso">Philippine Peso</string>
+    <string name="currency_polish_zloty">Polish Zloty</string>
+    <string name="currency_romanian_leu">Romanian Leu</string>
+    <string name="currency_russian_ruble">Russian Ruble</string>
+    <string name="currency_swedish_krona">Swedish Krona</string>
+    <string name="currency_singapore_dollar">Singapore Dollar</string>
+    <string name="currency_thai_baht">Thai Baht</string>
+    <string name="currency_united_states_dollar">United States Dollar</string>
+    <string name="currency_south_african_rand">South African Rand</string>
+
 </resources>

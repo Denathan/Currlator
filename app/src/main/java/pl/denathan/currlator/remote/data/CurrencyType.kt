@@ -14,7 +14,7 @@ enum class CurrencyType(val code: String) {
     CHINESE_JUAN("CNY"),
     CZECH_KORUNA("CZK"),
     DANISH_KRONE("DKK"),
-    BRITISH_PUND("GBP"),
+    BRITISH_POUND("GBP"),
     HONG_KONG_DOLLAR("HKD"),
     CROATIAN_KUNA("HRK"),
     HUNGARIAN_FORNIT("HUF"),
