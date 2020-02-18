@@ -12,6 +12,16 @@ sealed class CurrenciesAction : BaseAction<CurrenciesViewState> {
 
     object LoadingInProgress : CurrenciesAction() {
         override fun reduce(previousState: CurrenciesViewState): CurrenciesViewState =
-            previousState.copy(loadingInProgress = true)
+            CurrenciesViewState(loadingInProgress = true)
+    }
+
+    object GenericErrorOccurred : CurrenciesAction() {
+        override fun reduce(previousState: CurrenciesViewState): CurrenciesViewState =
+            CurrenciesViewState(apiError = GenericError)
+    }
+
+    object InternetErrorOccurred : CurrenciesAction() {
+        override fun reduce(previousState: CurrenciesViewState): CurrenciesViewState =
+            CurrenciesViewState(apiError = InternetError)
     }
 }

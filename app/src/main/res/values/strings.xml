@@ -33,5 +33,7 @@
     <string name="currency_thai_baht">Thai Baht</string>
     <string name="currency_united_states_dollar">United States Dollar</string>
     <string name="currency_south_african_rand">South African Rand</string>
+    <string name="generic_error">Something went wrong.</string>
+    <string name="internet_connection_error">Please make sure you\'ve got internet connection.</string>
 
 </resources>

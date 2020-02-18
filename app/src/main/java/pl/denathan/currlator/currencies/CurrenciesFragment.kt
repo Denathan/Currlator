@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.textview.MaterialTextView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_currencies.currencies_list
+import kotlinx.android.synthetic.main.fragment_currencies.error
 import kotlinx.android.synthetic.main.fragment_currencies.progress
 import pl.denathan.currlator.R
 import pl.denathan.currlator.currencies.adapter.CurrenciesAdapter
@@ -62,6 +64,7 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
                 currenciesAdapter.submitList(it.rates.currency)
             }
             progress.showProgress(loadingInProgress)
+            error.showError(apiError)
         }
     }
 
@@ -79,5 +82,21 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
     private fun View.showProgress(show: Boolean) {
         visibility = if(show) View.VISIBLE
         else View.GONE
+    }
+
+    private fun MaterialTextView.showError(error: ApiError?) {
+        when(error) {
+            is GenericError -> {
+                text = context.getString(R.string.generic_error)
+                visibility = View.VISIBLE
+            }
+            is InternetError -> {
+                text = context.getString(R.string.internet_connection_error)
+                visibility = View.VISIBLE
+            }
+            else -> {
+                visibility = View.GONE
+            }
+        }
     }
 }
