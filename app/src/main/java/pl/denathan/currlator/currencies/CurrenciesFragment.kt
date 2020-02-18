@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_currencies.currencies_list
+import kotlinx.android.synthetic.main.fragment_currencies.progress
 import pl.denathan.currlator.R
 import pl.denathan.currlator.currencies.adapter.CurrenciesAdapter
 import pl.denathan.currlator.di.ViewModelFactory
@@ -60,6 +61,7 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
             currencyResponse?.let {
                 currenciesAdapter.submitList(it.rates.currency)
             }
+            progress.showProgress(loadingInProgress)
         }
     }
 
@@ -72,5 +74,10 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
             layoutManager = LinearLayoutManager(context)
             adapter = currenciesAdapter
         }
+    }
+
+    private fun View.showProgress(show: Boolean) {
+        visibility = if(show) View.VISIBLE
+        else View.GONE
     }
 }

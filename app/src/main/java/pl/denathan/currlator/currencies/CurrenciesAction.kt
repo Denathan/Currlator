@@ -5,8 +5,13 @@ import pl.denathan.currlator.remote.data.CurrencyResponse
 
 sealed class CurrenciesAction : BaseAction<CurrenciesViewState> {
 
-    data class FetchCurrencyData(val currencyResponse: CurrencyResponse): CurrenciesAction() {
+    data class FetchCurrencyData(val currencyResponse: CurrencyResponse) : CurrenciesAction() {
         override fun reduce(previousState: CurrenciesViewState): CurrenciesViewState =
             CurrenciesViewState(currencyResponse)
+    }
+
+    object LoadingInProgress : CurrenciesAction() {
+        override fun reduce(previousState: CurrenciesViewState): CurrenciesViewState =
+            previousState.copy(loadingInProgress = true)
     }
 }
