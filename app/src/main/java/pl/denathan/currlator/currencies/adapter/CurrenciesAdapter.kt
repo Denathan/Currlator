@@ -36,7 +36,7 @@ class CurrenciesAdapter :
         else holder.input.setText(getItem(position).rate.toString())
     }
 
-    class CurrencyViewHolder(itemView: View, val context: Context) : RecyclerView.ViewHolder(itemView) {
+    class CurrencyViewHolder(itemView: View, private val context: Context) : RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.title
         val input: TextInputEditText = itemView.input
