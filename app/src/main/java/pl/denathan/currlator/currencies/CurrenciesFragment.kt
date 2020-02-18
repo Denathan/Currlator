@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.android.material.textview.MaterialTextView
+import com.jakewharton.rxbinding2.view.RxView
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.fragment_currencies.currencies_list
 import kotlinx.android.synthetic.main.fragment_currencies.error
 import kotlinx.android.synthetic.main.fragment_currencies.progress
+import kotlinx.android.synthetic.main.fragment_currencies.reload_button
 import pl.denathan.currlator.R
 import pl.denathan.currlator.currencies.adapter.CurrenciesAdapter
 import pl.denathan.currlator.di.ViewModelFactory
@@ -63,12 +65,17 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
             currencyResponse?.let {
                 currenciesAdapter.submitList(it.rates.currency)
             }
-            progress.showProgress(loadingInProgress)
+            progress.manageVisibility(loadingInProgress)
             error.showError(apiError)
+            reload_button.manageVisibility(apiError != null && currencyResponse == null)
         }
     }
 
-    override fun emitIntent(): Observable<CurrenciesIntent> = fragmentStartedSubject
+    override fun emitIntent(): Observable<CurrenciesIntent> =
+        fragmentStartedSubject.mergeWith(reloadButtonClicked())
+
+    private fun reloadButtonClicked(): Observable<CurrenciesIntent> =
+        RxView.clicks(reload_button).map { CurrenciesIntent.ReloadData }
 
     private fun initRecyclerView() {
         currenciesAdapter = CurrenciesAdapter()
@@ -79,13 +86,13 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
         }
     }
 
-    private fun View.showProgress(show: Boolean) {
-        visibility = if(show) View.VISIBLE
+    private fun View.manageVisibility(show: Boolean) {
+        visibility = if (show) View.VISIBLE
         else View.GONE
     }
 
     private fun MaterialTextView.showError(error: ApiError?) {
-        when(error) {
+        when (error) {
             is GenericError -> {
                 text = context.getString(R.string.generic_error)
                 visibility = View.VISIBLE

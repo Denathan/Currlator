@@ -19,13 +19,16 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
             .distinctUntilChanged()
             .flatMapSingle { apiService.fetchRates(baseCurrency) }
             .map<CurrenciesAction> { CurrenciesAction.FetchCurrencyData(it) }
-            .onErrorReturn {
-                if (it is IOException) CurrenciesAction.InternetErrorOccurred
-                else CurrenciesAction.GenericErrorOccurred
-            }
+            .handleError()
             .startWith(CurrenciesAction.LoadingInProgress)
             .subscribeOn(Schedulers.computation())
             .observeOn(AndroidSchedulers.mainThread())
+
+    private fun Observable<CurrenciesAction>.handleError() =
+        onErrorReturn {
+            if (it is IOException) CurrenciesAction.InternetErrorOccurred
+            else CurrenciesAction.GenericErrorOccurred
+        }
 
     private companion object {
         const val baseCurrency = "EUR"

@@ -1,6 +1,8 @@
 package pl.denathan.currlator.currencies
 
 import io.reactivex.Observable
+import pl.denathan.currlator.currencies.CurrenciesIntent.FragmentStarted
+import pl.denathan.currlator.currencies.CurrenciesIntent.ReloadData
 import pl.denathan.currlator.mvi.BaseIntent
 import pl.denathan.currlator.mvi.BaseViewModel
 import javax.inject.Inject
@@ -12,7 +14,8 @@ class CurrenciesViewModel @Inject constructor(private val interactor: Currencies
 
     override fun <I : BaseIntent> intentToAction(intent: I): Observable<CurrenciesAction> =
         when(intent) {
-            is CurrenciesIntent.FragmentStarted -> interactor.fetchCurrencies()
+            is FragmentStarted -> interactor.fetchCurrencies()
+            is ReloadData -> interactor.fetchCurrencies()
             else -> Observable.never()
         }
 
