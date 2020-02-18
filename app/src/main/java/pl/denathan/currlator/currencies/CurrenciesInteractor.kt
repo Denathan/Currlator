@@ -5,11 +5,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import pl.denathan.currlator.remote.ApiService
+import pl.denathan.currlator.util.RxSchedulers
 import java.io.IOException
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class CurrenciesInteractor @Inject constructor(private val apiService: ApiService) {
+class CurrenciesInteractor @Inject constructor(private val apiService: ApiService, private val schedulers: RxSchedulers) {
 
     val unbindSubject = PublishSubject.create<Unit>()
 
@@ -21,8 +22,8 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
             .map<CurrenciesAction> { CurrenciesAction.FetchCurrencyData(it) }
             .handleError()
             .startWith(CurrenciesAction.LoadingInProgress)
-            .subscribeOn(Schedulers.computation())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(schedulers.computation)
+            .observeOn(schedulers.main)
 
     private fun Observable<CurrenciesAction>.handleError() =
         onErrorReturn {

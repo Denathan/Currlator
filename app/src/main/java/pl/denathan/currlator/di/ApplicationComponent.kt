@@ -16,6 +16,7 @@ import javax.inject.Singleton
         ViewModelModule::class,
         NetworkModule::class,
         ServiceModule::class,
+        RxSchedulersModule::class,
         CurrenciesModule::class]
 )
 interface ApplicationComponent : AndroidInjector<CurrlatorApplication> {
