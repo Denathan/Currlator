@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import androidx.annotation.DrawableRes
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -19,8 +18,6 @@ import pl.denathan.currlator.R
 import pl.denathan.currlator.extensions.findCurrencyFullNameId
 import pl.denathan.currlator.extensions.findCurrencyIcon
 import pl.denathan.currlator.remote.data.Currency
-import pl.denathan.currlator.remote.data.CurrencyType
-import pl.denathan.currlator.remote.data.CurrencyType.*
 
 class CurrenciesAdapter :
     ListAdapter<Currency, CurrenciesAdapter.CurrencyViewHolder>(CurrenciesItemCallback()) {
