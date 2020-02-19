@@ -1,15 +1,18 @@
 package pl.denathan.currlator.currencies.adapter
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.widget.addTextChangedListener
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
 import kotlinx.android.synthetic.main.view_currency_row.view.subtitle
@@ -21,6 +24,8 @@ import pl.denathan.currlator.remote.data.Currency
 
 class CurrenciesAdapter :
     ListAdapter<Currency, CurrenciesAdapter.CurrencyViewHolder>(CurrenciesItemCallback()) {
+    private var multiplier = 1.0
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder =
         CurrencyViewHolder(
             LayoutInflater.from(parent.context).inflate(
@@ -36,10 +41,10 @@ class CurrenciesAdapter :
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int, payloads: List<Any>) {
         if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
-        else holder.input.setText(getItem(position).rate.toString())
+        else holder.input.setText(holder.setInputText(getItem(position).rate))
     }
 
-    class CurrencyViewHolder(itemView: View, private val context: Context) :
+    inner class CurrencyViewHolder(itemView: View, private val context: Context) :
         RecyclerView.ViewHolder(itemView) {
 
         private val title: TextView = itemView.title
@@ -47,9 +52,19 @@ class CurrenciesAdapter :
         val input: TextInputEditText = itemView.input
 
         fun bind(currency: Currency) {
-            input.setText(currency.rate.toString())
+            if (!input.isFocused) input.setText(setInputText(currency.rate))
+            Log.i("xDDD", "type:${currency.currencyType} ,inputValue: $multiplier currency.rate: ${input.text.toString()}")
             mapCurrencyToText(currency)
+            input.addTextChangedListener {
+                if (input.isFocused) {
+                    multiplier = it.toString().toDouble() / currency.rate
+                }
+            }
         }
+
+        fun setInputText(currencyRate: Double): String =
+            (currencyRate * multiplier).toString()
+
 
         private fun mapCurrencyToText(currency: Currency) {
             title.text = currency.currencyType.code
