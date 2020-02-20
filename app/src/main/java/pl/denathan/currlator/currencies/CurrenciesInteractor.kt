@@ -18,7 +18,7 @@ import javax.inject.Inject
 class CurrenciesInteractor @Inject constructor(private val apiService: ApiService, private val schedulers: RxSchedulers) {
 
     val unbindSubject = PublishSubject.create<Unit>()
-    private var firstCurrencyType = CurrencyType.getCurrencyTypeFromId("EUR")
+    private var firstCurrencyType = CurrencyType.getCurrencyTypeFromId(baseCurrency)
 
     fun fetchCurrencies(): Observable<CurrenciesAction> =
         Observable.interval(0, 1, TimeUnit.SECONDS)
@@ -33,6 +33,10 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
             .startWith(CurrenciesAction.LoadingInProgress)
             .subscribeOn(schedulers.computation)
             .observeOn(schedulers.main)
+
+    fun setFirstCurrencyType(currencyType: CurrencyType) {
+        firstCurrencyType = currencyType
+    }
 
     private fun swapFirstItem(currencyResponse: List<Currency>): List<Currency> {
         val firstCurrency = currencyResponse.find { it.currencyType == firstCurrencyType }

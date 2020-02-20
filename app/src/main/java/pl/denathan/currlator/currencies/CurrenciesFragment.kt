@@ -72,7 +72,10 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
     }
 
     override fun emitIntent(): Observable<CurrenciesIntent> =
-        Observable.merge(fragmentStartedSubject, reloadButtonClicked(), focusedCurrencySubject())
+        Observable.merge(fragmentStartedSubject, reloadButtonClicked())
+
+    override fun emitIntentWithoutAction(): Observable<CurrenciesIntent> =
+        focusedCurrencySubject()
 
     private fun reloadButtonClicked(): Observable<CurrenciesIntent> =
         RxView.clicks(reload_button).map { CurrenciesIntent.ReloadData }

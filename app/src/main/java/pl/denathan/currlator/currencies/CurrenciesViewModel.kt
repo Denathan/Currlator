@@ -19,6 +19,10 @@ class CurrenciesViewModel @Inject constructor(private val interactor: Currencies
             else -> Observable.never()
         }
 
+    override fun <I : BaseIntent> intentWithoutAction(intent: I) {
+        if (intent is CurrenciesIntent.CurrencyFocused) interactor.setFirstCurrencyType(intent.currencyType)
+    }
+
     override fun unbind() {
         super.unbind()
         interactor.unbindSubject.onNext(Unit)
