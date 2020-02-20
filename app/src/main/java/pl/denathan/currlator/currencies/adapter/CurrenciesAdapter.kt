@@ -13,7 +13,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
 import io.reactivex.Completable
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
@@ -22,6 +21,7 @@ import kotlinx.android.synthetic.main.view_currency_row.view.title
 import pl.denathan.currlator.R
 import pl.denathan.currlator.extensions.findCurrencyFullNameId
 import pl.denathan.currlator.extensions.findCurrencyIcon
+import pl.denathan.currlator.extensions.uiThread
 import pl.denathan.currlator.remote.data.Currency
 import pl.denathan.currlator.remote.data.CurrencyType
 import kotlin.math.round
@@ -104,9 +104,6 @@ class CurrenciesAdapter :
                 .apply(RequestOptions.circleCropTransform())
                 .into(itemView.image)
         }
-
-        private fun Completable.uiThread() = subscribeOn(AndroidSchedulers.mainThread())
-            .observeOn(AndroidSchedulers.mainThread())
     }
 }
 
