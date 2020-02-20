@@ -42,7 +42,7 @@ class CurrenciesAdapter :
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int, payloads: List<Any>) {
         if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
-        else holder.input.setText(holder.setInputText(getItem(position).rate))
+        else if (!holder.input.isFocused) holder.input.setText(holder.setInputText(getItem(position).rate))
     }
 
     inner class CurrencyViewHolder(itemView: View, private val context: Context) :
@@ -55,9 +55,11 @@ class CurrenciesAdapter :
         fun bind(currency: Currency) {
             if (!input.isFocused) input.setText(setInputText(currency.rate))
             mapCurrencyToText(currency)
-            input.addTextChangedListener {
+            input.addTextChangedListener { editable ->
                 if (input.isFocused) {
-                    multiplier = if (it.toString().isNotEmpty()) it.toString().toDouble() / currency.rate else 0.0
+                    multiplier =
+                        if (editable.toString().isNotEmpty()) editable.toString().toDouble() / currency.rate
+                        else 0.0
                 }
             }
         }
