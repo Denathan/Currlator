@@ -21,10 +21,6 @@ abstract class BaseViewModel<S : BaseViewState, V : BaseView<S, *>, A : BaseActi
 
     fun isAlreadyInitialized() = isInitialized
 
-    fun setInitialViewState(viewState: S) {
-        stateSubject.onNext(viewState)
-    }
-
     fun attachView(view: V) {
         this.view = view
         isInitialized = true
@@ -48,7 +44,7 @@ abstract class BaseViewModel<S : BaseViewState, V : BaseView<S, *>, A : BaseActi
         subscribed = true
     }
 
-    fun getViewState(): S = stateSubject.value ?: defaultViewState
+    private fun getViewState(): S = stateSubject.value ?: defaultViewState
 
     private fun reduce(previousState: S, partialState: A): S =
         partialState.reduce(previousState)
@@ -77,8 +73,6 @@ abstract class BaseViewModel<S : BaseViewState, V : BaseView<S, *>, A : BaseActi
                 }
         )
     }
-
-    protected fun just(action: A): Observable<A> = Observable.just(action)
 
     @CallSuper
     open fun unbind() {
