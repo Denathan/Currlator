@@ -21,6 +21,7 @@ import pl.denathan.currlator.R
 import pl.denathan.currlator.extensions.findCurrencyFullNameId
 import pl.denathan.currlator.extensions.findCurrencyIcon
 import pl.denathan.currlator.remote.data.Currency
+import kotlin.math.round
 
 class CurrenciesAdapter :
     ListAdapter<Currency, CurrenciesAdapter.CurrencyViewHolder>(CurrenciesItemCallback()) {
@@ -62,8 +63,10 @@ class CurrenciesAdapter :
         }
 
         fun setInputText(currencyRate: Double): String =
-            (currencyRate * multiplier).toString()
+            getRoundedValue(currencyRate).toString()
 
+        private fun getRoundedValue(currencyRate: Double) =
+            round((currencyRate * multiplier) * 100) / 100.0
 
         private fun mapCurrencyToText(currency: Currency) {
             title.text = currency.currencyType.code
