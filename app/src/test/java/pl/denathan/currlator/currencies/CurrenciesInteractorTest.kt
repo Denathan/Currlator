@@ -11,6 +11,8 @@ import org.junit.Before
 import org.junit.Test
 import pl.denathan.currlator.factories.CurrencyResponseFactory
 import pl.denathan.currlator.remote.ApiService
+import pl.denathan.currlator.remote.data.Currency
+import pl.denathan.currlator.remote.data.CurrencyType
 import pl.denathan.currlator.util.TestSchedulers
 import java.io.IOException
 import java.util.Collections
@@ -37,6 +39,21 @@ class CurrenciesInteractorTest {
         val testObserver = interactor.fetchCurrencies().test()
         testScheduler.advanceTimeBy(1, MILLISECONDS)
 
+        val action = CurrenciesAction.FetchCurrencyData(response)
+        testObserver.assertValues(loadingAction, action)
+    }
+
+    @Test
+    fun `fetch currencies and rates from the server and change their order`() {
+        val response = CurrencyResponseFactory.getResponse()
+
+        whenever(apiService.fetchRates(any())) doReturn Single.just(response)
+
+        interactor.setFirstCurrencyType(CurrencyType.AUSTRALIAN_DOLLAR)
+        val testObserver = interactor.fetchCurrencies().test()
+        testScheduler.advanceTimeBy(1, MILLISECONDS)
+
+        Collections.swap(response.rates.currency, 1, 0)
         val action = CurrenciesAction.FetchCurrencyData(response)
         testObserver.assertValues(loadingAction, action)
     }
@@ -75,6 +92,19 @@ class CurrenciesInteractorTest {
         testScheduler.advanceTimeBy(1, MILLISECONDS)
 
         val action = CurrenciesAction.InternetErrorOccurred
+        testObserver.assertValues(loadingAction, action)
+    }
+
+    @Test
+    fun `handle error when retrieved list is empty`() {
+        val response = CurrencyResponseFactory.getResponse(currencies = emptyList())
+
+        whenever(apiService.fetchRates(any())) doReturn Single.just(response)
+
+        val testObserver = interactor.fetchCurrencies().test()
+        testScheduler.advanceTimeBy(1, MILLISECONDS)
+
+        val action = CurrenciesAction.GenericErrorOccurred
         testObserver.assertValues(loadingAction, action)
     }
 }
