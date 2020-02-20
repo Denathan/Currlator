@@ -12,7 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
-import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
@@ -67,13 +68,24 @@ class CurrenciesAdapter :
                         else 0.0
                 }
             }
-            input.onFocusChangeListener = View.OnFocusChangeListener { _, gainedFocus -> if (gainedFocus) focusedCurrencySubject.onNext(currency.currencyType) }
+            input.onFocusChangeListener = View.OnFocusChangeListener { _, gainedFocus ->
+                if (gainedFocus) {
+                    focusedCurrencySubject.onNext(currency.currencyType)
+                    notifyOnUiThread()
+                }
+            }
         }
-
-        private fun getUserInputAsDouble(editable: Editable?) = editable.toString().toDouble()
 
         fun setInputText(currencyRate: Double): String =
             getRoundedValue(currencyRate).toString()
+
+        private fun notifyOnUiThread() {
+            Completable.fromAction { notifyItemMoved(adapterPosition, 0) }
+                .uiThread()
+                .subscribe()
+        }
+
+        private fun getUserInputAsDouble(editable: Editable?) = editable.toString().toDouble()
 
         private fun getRoundedValue(currencyRate: Double) =
             round((currencyRate * multiplier) * 100) / 100.0
@@ -92,6 +104,9 @@ class CurrenciesAdapter :
                 .apply(RequestOptions.circleCropTransform())
                 .into(itemView.image)
         }
+
+        private fun Completable.uiThread() = subscribeOn(AndroidSchedulers.mainThread())
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }
 
