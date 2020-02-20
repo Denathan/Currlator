@@ -72,10 +72,14 @@ class CurrenciesFragment : BaseFragment<CurrenciesViewState, CurrenciesView, Cur
     }
 
     override fun emitIntent(): Observable<CurrenciesIntent> =
-        fragmentStartedSubject.mergeWith(reloadButtonClicked())
+        Observable.merge(fragmentStartedSubject, reloadButtonClicked(), focusedCurrencySubject())
 
     private fun reloadButtonClicked(): Observable<CurrenciesIntent> =
         RxView.clicks(reload_button).map { CurrenciesIntent.ReloadData }
+
+    private fun focusedCurrencySubject(): Observable<CurrenciesIntent> =
+        currenciesAdapter.focusedCurrencySubject
+            .map { currencyType -> CurrenciesIntent.CurrencyFocused(currencyType) }
 
     private fun initRecyclerView() {
         currenciesAdapter = CurrenciesAdapter()

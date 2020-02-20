@@ -12,6 +12,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
+import io.reactivex.subjects.BehaviorSubject
+import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
 import kotlinx.android.synthetic.main.view_currency_row.view.subtitle
@@ -26,6 +28,7 @@ import kotlin.math.round
 class CurrenciesAdapter :
     ListAdapter<Currency, CurrenciesAdapter.CurrencyViewHolder>(CurrenciesItemCallback()) {
     private var multiplier = 1.0
+    val focusedCurrencySubject = PublishSubject.create<CurrencyType>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CurrencyViewHolder =
         CurrencyViewHolder(
@@ -64,6 +67,7 @@ class CurrenciesAdapter :
                         else 0.0
                 }
             }
+            input.onFocusChangeListener = View.OnFocusChangeListener { _, gainedFocus -> if (gainedFocus) focusedCurrencySubject.onNext(currency.currencyType) }
         }
 
         private fun getUserInputAsDouble(editable: Editable?) = editable.toString().toDouble()
