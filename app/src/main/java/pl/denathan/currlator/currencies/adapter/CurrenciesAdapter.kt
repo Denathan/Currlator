@@ -1,7 +1,7 @@
 package pl.denathan.currlator.currencies.adapter
 
 import android.content.Context
-import android.util.Log
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.textfield.TextInputEditText
-import io.reactivex.subjects.PublishSubject
 import kotlinx.android.synthetic.main.view_currency_row.view.image
 import kotlinx.android.synthetic.main.view_currency_row.view.input
 import kotlinx.android.synthetic.main.view_currency_row.view.subtitle
@@ -41,8 +40,10 @@ class CurrenciesAdapter :
     }
 
     override fun onBindViewHolder(holder: CurrencyViewHolder, position: Int, payloads: List<Any>) {
-        if (payloads.isEmpty()) super.onBindViewHolder(holder, position, payloads)
-        else if (!holder.input.isFocused) holder.input.setText(holder.setInputText(getItem(position).rate))
+        with(holder) {
+            if (payloads.isEmpty()) super.onBindViewHolder(this, position, payloads)
+            else if (!input.isFocused) input.setText(setInputText(getItem(position).rate))
+        }
     }
 
     inner class CurrencyViewHolder(itemView: View, private val context: Context) :
@@ -58,11 +59,13 @@ class CurrenciesAdapter :
             input.addTextChangedListener { editable ->
                 if (input.isFocused) {
                     multiplier =
-                        if (editable.toString().isNotEmpty()) editable.toString().toDouble() / currency.rate
+                        if (editable.toString().isNotEmpty()) getUserInputAsDouble(editable) / currency.rate
                         else 0.0
                 }
             }
         }
+
+        private fun getUserInputAsDouble(editable: Editable?) = editable.toString().toDouble()
 
         fun setInputText(currencyRate: Double): String =
             getRoundedValue(currencyRate).toString()
@@ -71,8 +74,14 @@ class CurrenciesAdapter :
             round((currencyRate * multiplier) * 100) / 100.0
 
         private fun mapCurrencyToText(currency: Currency) {
-            title.text = currency.currencyType.code
-            subtitle.text = context.getString(currency.currencyType.findCurrencyFullNameId())
+            with(currency) {
+                title.text = currencyType.code
+                subtitle.text = context.getString(currencyType.findCurrencyFullNameId())
+                loadCircularImage(this)
+            }
+        }
+
+        private fun loadCircularImage(currency: Currency) {
             Glide.with(context)
                 .load(currency.currencyType.findCurrencyIcon())
                 .apply(RequestOptions.circleCropTransform())
