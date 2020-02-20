@@ -3,14 +3,14 @@ object Versions {
     const val kotlin = "1.3.61"
 
     /** Android versions */
-    const val compile_sdk_version = 28
-    const val min_sdk_version = 23
-    const val target_sdk_version = 28
-    const val android_gradle_plugin = "3.5.3"
+    const val compileSdkVersion = 28
+    const val minSdkVersion = 23
+    const val targetSdkVersion = 28
+    const val androidGradlePlugin = "3.5.3"
 
     /** AndroidX */
     const val androidx = "1.0.2"
-    const val constraint_layout = "1.1.3"
+    const val constraintLayout = "1.1.3"
     const val activity = "1.1.0"
     const val fragment = "1.2.1"
     const val lifecycle = "2.2.0"
@@ -21,8 +21,8 @@ object Versions {
     const val mockito = "2.2.0"
 
     /** Instrumentation tests */
-    const val androidx_junit = "1.1.1"
-    const val androidx_espresso = "3.2.0"
+    const val androidxJunit = "1.1.1"
+    const val androidxEspresso = "3.2.0"
 
     /** RxJava2 */
     const val rxJava2 = "2.2.10"
@@ -43,14 +43,14 @@ object Versions {
 
 object Dependencies {
     /** Project dependencies */
-    const val android_gradle_plugin = "com.android.tools.build:gradle:${Versions.android_gradle_plugin}"
-    const val kotlin_gradle_plugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
+    const val androidGradlePlugin = "com.android.tools.build:gradle:${Versions.androidGradlePlugin}"
+    const val kotlinGradlePlugin = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
 
     /** App dependencies */
-    const val kotlin_stdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
-    const val androidx_appcompat = "androidx.appcompat:appcompat:${Versions.androidx}"
-    const val androidx_core_ktx = "androidx.core:core-ktx:${Versions.androidx}"
-    const val constraint_layout = "androidx.constraintlayout:constraintlayout:${Versions.constraint_layout}"
+    const val kotlinStdlib = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}"
+    const val androidxAppcompat = "androidx.appcompat:appcompat:${Versions.androidx}"
+    const val androidxCoreKtx = "androidx.core:core-ktx:${Versions.androidx}"
+    const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
     const val activity = "androidx.activity:activity-ktx:${Versions.activity}"
     const val fragment = "androidx.fragment:fragment-ktx:${Versions.fragment}"
     const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
@@ -59,10 +59,10 @@ object Dependencies {
     /** Unit tests dependencies */
     const val junit = "junit:junit:${Versions.junit}"
     const val mockito = "com.nhaarman.mockitokotlin2:mockito-kotlin:${Versions.mockito}"
+    const val androidxJunit = "androidx.test.ext:junit:${Versions.androidxJunit}"
 
     /** Instrumentation tests dependencies */
-    const val androidx_junit = "androidx.test.ext:junit:${Versions.androidx_junit}"
-    const val androidx_espresso = "androidx.test.espresso:espresso-core:${Versions.androidx_espresso}"
+    const val androidxEspresso = "androidx.test.espresso:espresso-core:${Versions.androidxEspresso}"
 
     /** RxJava2 */
     const val rxJava2 = "io.reactivex.rxjava2:rxjava:${Versions.rxJava2}"

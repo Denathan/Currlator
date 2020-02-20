@@ -8,11 +8,11 @@ def apikeyProperties = new Properties()
 apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
-    compileSdkVersion Versions.compile_sdk_version
+    compileSdkVersion Versions.compileSdkVersion
     defaultConfig {
         applicationId "pl.denathan.currlator"
-        minSdkVersion Versions.min_sdk_version
-        targetSdkVersion Versions.target_sdk_version
+        minSdkVersion Versions.minSdkVersion
+        targetSdkVersion Versions.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -38,10 +38,10 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation Dependencies.kotlin_stdlib
-    implementation Dependencies.androidx_appcompat
-    implementation Dependencies.androidx_core_ktx
-    implementation Dependencies.constraint_layout
+    implementation Dependencies.kotlinStdlib
+    implementation Dependencies.androidxAppcompat
+    implementation Dependencies.androidxCoreKtx
+    implementation Dependencies.constraintLayout
     implementation Dependencies.activity
     implementation Dependencies.fragment
     implementation Dependencies.lifecycle
@@ -64,8 +64,8 @@ dependencies {
 
     testImplementation Dependencies.junit
     testImplementation Dependencies.mockito
-    androidTestImplementation Dependencies.androidx_junit
-    androidTestImplementation Dependencies.androidx_espresso
+    androidTestImplementation Dependencies.androidxJunit
+    androidTestImplementation Dependencies.androidxEspresso
 
     implementation Dependencies.glide
     kapt Dependencies.glideCompiler

@@ -7,8 +7,8 @@ buildscript {
         
     }
     dependencies {
-        classpath Dependencies.android_gradle_plugin
-        classpath Dependencies.kotlin_gradle_plugin
+        classpath Dependencies.androidGradlePlugin
+        classpath Dependencies.kotlinGradlePlugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
