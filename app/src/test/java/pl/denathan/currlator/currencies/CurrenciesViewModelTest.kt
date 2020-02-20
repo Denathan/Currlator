@@ -8,6 +8,7 @@ import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import org.junit.Test
 import pl.denathan.currlator.factories.CurrencyResponseFactory
+import pl.denathan.currlator.remote.data.CurrencyType
 
 class CurrenciesViewModelTest {
 
@@ -53,5 +54,15 @@ class CurrenciesViewModelTest {
             CurrenciesViewState(),
             CurrenciesViewState(currencyResponse = response)
         )
+    }
+
+    @Test
+    fun `emit focused currency type`() {
+        val currencyType = CurrencyType.BRITISH_POUND
+        viewRobot.startView()
+        viewRobot.emitCurrencyFocus(currencyType)
+        viewRobot.stopView()
+
+        verify(interactor).setFirstCurrencyType(currencyType)
     }
 }
