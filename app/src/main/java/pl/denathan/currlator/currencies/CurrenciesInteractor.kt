@@ -1,21 +1,21 @@
 package pl.denathan.currlator.currencies
 
 import io.reactivex.Observable
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import io.reactivex.subjects.PublishSubject
 import pl.denathan.currlator.remote.ApiService
 import pl.denathan.currlator.remote.data.Currency
 import pl.denathan.currlator.remote.data.CurrencyResponse
 import pl.denathan.currlator.remote.data.CurrencyType
-import pl.denathan.currlator.remote.data.Rates
 import pl.denathan.currlator.util.RxSchedulers
 import java.io.IOException
 import java.util.Collections
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
-class CurrenciesInteractor @Inject constructor(private val apiService: ApiService, private val schedulers: RxSchedulers) {
+class CurrenciesInteractor @Inject constructor(
+    private val apiService: ApiService,
+    private val schedulers: RxSchedulers
+) {
 
     val unbindSubject = PublishSubject.create<Unit>()
     private var firstCurrencyType = CurrencyType.getCurrencyTypeFromId(baseCurrency)
@@ -25,8 +25,13 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
             .takeUntil(unbindSubject)
             .distinctUntilChanged()
             .flatMapSingle { apiService.fetchRates(baseCurrency) }
-            .map {
-                CurrencyResponse(it.baseCurrency, it.rates.copy(currency = swapFirstItem(it.rates.currency)))
+            .map { currencyResponse ->
+                with(currencyResponse) {
+                    CurrencyResponse(
+                        baseCurrency,
+                        rates.copy(currency = swapFirstItem(rates.currency))
+                    )
+                }
             }
             .map<CurrenciesAction> { CurrenciesAction.FetchCurrencyData(it) }
             .handleError()
@@ -38,12 +43,13 @@ class CurrenciesInteractor @Inject constructor(private val apiService: ApiServic
         firstCurrencyType = currencyType
     }
 
-    private fun swapFirstItem(currencyResponse: List<Currency>): List<Currency> {
-        val firstCurrency = currencyResponse.find { it.currencyType == firstCurrencyType }
-        val firstCurrencyIndex = currencyResponse.indexOf(firstCurrency)
-        Collections.swap(currencyResponse, firstCurrencyIndex, 0)
-        return currencyResponse
-    }
+    private fun swapFirstItem(currencyResponse: List<Currency>): List<Currency> =
+        with (currencyResponse) {
+            val firstCurrency = find { it.currencyType == firstCurrencyType }
+            val firstCurrencyIndex = indexOf(firstCurrency)
+            Collections.swap(this, firstCurrencyIndex, 0)
+            return this
+        }
 
     private fun Observable<CurrenciesAction>.handleError() =
         onErrorReturn {
