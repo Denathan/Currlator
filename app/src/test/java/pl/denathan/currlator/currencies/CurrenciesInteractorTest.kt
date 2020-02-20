@@ -13,6 +13,7 @@ import pl.denathan.currlator.factories.CurrencyResponseFactory
 import pl.denathan.currlator.remote.ApiService
 import pl.denathan.currlator.util.TestSchedulers
 import java.io.IOException
+import java.util.Collections
 import java.util.concurrent.TimeUnit.MILLISECONDS
 import java.util.concurrent.TimeUnit.SECONDS
 
