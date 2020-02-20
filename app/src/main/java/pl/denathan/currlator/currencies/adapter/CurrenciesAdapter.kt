@@ -20,6 +20,7 @@ import pl.denathan.currlator.R
 import pl.denathan.currlator.extensions.findCurrencyFullNameId
 import pl.denathan.currlator.extensions.findCurrencyIcon
 import pl.denathan.currlator.remote.data.Currency
+import pl.denathan.currlator.remote.data.CurrencyType
 import kotlin.math.round
 
 class CurrenciesAdapter :
@@ -77,13 +78,13 @@ class CurrenciesAdapter :
             with(currency) {
                 title.text = currencyType.code
                 subtitle.text = context.getString(currencyType.findCurrencyFullNameId())
-                loadCircularImage(this)
+                loadCircularImage(currencyType)
             }
         }
 
-        private fun loadCircularImage(currency: Currency) {
+        private fun loadCircularImage(currencyType: CurrencyType) {
             Glide.with(context)
-                .load(currency.currencyType.findCurrencyIcon())
+                .load(currencyType.findCurrencyIcon())
                 .apply(RequestOptions.circleCropTransform())
                 .into(itemView.image)
         }
