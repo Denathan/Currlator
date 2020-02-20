@@ -53,11 +53,10 @@ class CurrenciesAdapter :
 
         fun bind(currency: Currency) {
             if (!input.isFocused) input.setText(setInputText(currency.rate))
-            Log.i("xDDD", "type:${currency.currencyType} ,inputValue: $multiplier currency.rate: ${input.text.toString()}")
             mapCurrencyToText(currency)
             input.addTextChangedListener {
                 if (input.isFocused) {
-                    multiplier = it.toString().toDouble() / currency.rate
+                    multiplier = if (it.toString().isNotEmpty()) it.toString().toDouble() / currency.rate else 0.0
                 }
             }
         }
