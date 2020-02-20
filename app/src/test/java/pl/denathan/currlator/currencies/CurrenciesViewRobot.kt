@@ -5,7 +5,8 @@ import io.reactivex.subjects.PublishSubject
 import pl.denathan.currlator.BaseViewRobot
 import pl.denathan.currlator.remote.data.CurrencyType
 
-class CurrenciesViewRobot(viewModel: CurrenciesViewModel) : BaseViewRobot<CurrenciesView, CurrenciesViewModel, CurrenciesViewState>(viewModel) {
+class CurrenciesViewRobot(viewModel: CurrenciesViewModel) :
+    BaseViewRobot<CurrenciesView, CurrenciesViewModel, CurrenciesViewState>(viewModel) {
 
     private val fragmentStartedSubject = PublishSubject.create<CurrenciesIntent>()
     private val reloadClickedSubject = PublishSubject.create<CurrenciesIntent>()

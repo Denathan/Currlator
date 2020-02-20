@@ -1,7 +1,7 @@
 package pl.denathan.currlator.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import pl.denathan.currlator.R
@@ -13,13 +13,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        CurrenciesFragment().display(supportFragmentManager,
+        CurrenciesFragment().display(
+            supportFragmentManager,
             R.id.fragmentContainer,
             FRAGMENT_CURRENCIES_TAG
         )
     }
 
-    private fun Fragment.display(supportFragmentManager: FragmentManager, containerViewId: Int, fragmentTag: String) {
+    private fun Fragment.display(
+        supportFragmentManager: FragmentManager,
+        containerViewId: Int,
+        fragmentTag: String
+    ) {
         supportFragmentManager.beginTransaction().also { fragmentTransaction ->
             fragmentTransaction.replace(containerViewId, this, fragmentTag)
             fragmentTransaction.commit()

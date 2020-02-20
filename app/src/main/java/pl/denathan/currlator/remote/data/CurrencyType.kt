@@ -1,8 +1,7 @@
 package pl.denathan.currlator.remote.data
 
-import java.lang.IndexOutOfBoundsException
-
-class CurrencyTypeParingError(code:String) : IndexOutOfBoundsException("CurrencyTypeParingError code: $code")
+class CurrencyTypeParingError(code: String) :
+    IndexOutOfBoundsException("CurrencyTypeParingError code: $code")
 
 enum class CurrencyType(val code: String) {
     EURO("EUR"),
@@ -39,6 +38,7 @@ enum class CurrencyType(val code: String) {
     SOUTH_AFRICAN_RAND("ZAR");
 
     companion object {
-        fun getCurrencyTypeFromId(code: String): CurrencyType = values().find { it.code == code } ?: throw CurrencyTypeParingError(code)
+        fun getCurrencyTypeFromId(code: String): CurrencyType =
+            values().find { it.code == code } ?: throw CurrencyTypeParingError(code)
     }
 }

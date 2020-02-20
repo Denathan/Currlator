@@ -44,7 +44,7 @@ class CurrenciesInteractor @Inject constructor(
     }
 
     private fun swapFirstItem(currencyResponse: List<Currency>): List<Currency> =
-        with (currencyResponse) {
+        with(currencyResponse) {
             val firstCurrency = find { it.currencyType == firstCurrencyType }
             val firstCurrencyIndex = indexOf(firstCurrency)
             Collections.swap(this, firstCurrencyIndex, 0)

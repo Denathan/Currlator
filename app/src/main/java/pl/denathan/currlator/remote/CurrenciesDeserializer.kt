@@ -26,7 +26,10 @@ class CurrenciesDeserializer : JsonDeserializer<CurrencyResponse> {
         return CurrencyResponse(baseCurrency = baseCurrencyType, rates = Rates(currenciesList))
     }
 
-    private fun getCurrenciesList(source: JsonObject, baseCurrencyType: CurrencyType): MutableList<Currency> {
+    private fun getCurrenciesList(
+        source: JsonObject,
+        baseCurrencyType: CurrencyType
+    ): MutableList<Currency> {
         val ratesKeysSet = source.getAsJsonObject(RATES_KEY).keySet()
         val ratesArray = source.getAsJsonObject(RATES_KEY)
         val currenciesList = mutableListOf<Currency>()

@@ -11,7 +11,6 @@ import org.junit.Before
 import org.junit.Test
 import pl.denathan.currlator.factories.CurrencyResponseFactory
 import pl.denathan.currlator.remote.ApiService
-import pl.denathan.currlator.remote.data.Currency
 import pl.denathan.currlator.remote.data.CurrencyType
 import pl.denathan.currlator.util.TestSchedulers
 import java.io.IOException
